@@ -18,6 +18,21 @@ locals {
   enable_cluster_encryption_config = length(var.cluster_encryption_config) > 0 && !local.create_outposts_local_cluster
 }
 
+moved {
+  from = aws_iam_role_policy_attachment.this["arn:aws:iam::aws:policy/AmazonEKSServicePolicy"]
+  to   = aws_iam_role_policy_attachment.additional["AmazonEKSServicePolicy"]
+}
+
+moved {
+  from = aws_iam_role_policy_attachment.this["arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"]
+  to   = aws_iam_role_policy_attachment.this["AmazonEKSClusterPolicy"]
+}
+
+moved {
+  from = aws_iam_role_policy_attachment.this["arn:aws:iam::aws:policy/AmazonEKSVPCResourceController"]
+  to   = aws_iam_role_policy_attachment.this["AmazonEKSVPCResourceController"]
+}
+
 ################################################################################
 # Cluster
 ################################################################################
